@@ -1,6 +1,60 @@
+services:
+  nginx:
+    container_name: nginx
+    depends_on:
+      - wordpress
+    build:
+      context: requirements/nginx
+      dockerfile: Dockerfile
+    restart: on-failure
+    secrets:
+      - ssl_key
+      - ssl_crt
+    ports:
+        - "8008:8080"
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    build:
+      context: requirements/wordpress
+      dockerfile: Dockerfile
+    restart: on-failure
+    volumes:
+      - "wordpress-data:/var/www/wordpress"
+    ports:
+      - "9000"
+
+  mariadb:
+    container_name: mariadb
+    build:
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - "mariadb-data:/var/lib/mysql"
+    restart: unless-stopped
+    expose:
+      - "3306"
+
+
+volumes:
+  wordpress-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/fguirama/data/wordpress'
+  mariadb-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/fguirama/data/mariadb'
+
 secrets:
   ssl_key:
-    file: ".SECRET/private_key.key"
+    file: "../.SECRET/private_key.key"
   ssl_crt:
-    file: ".SECRET/certificate.crt"
-
+    file: "../.SECRET/certificate.crt"

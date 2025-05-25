@@ -10,13 +10,15 @@
 #                                                                              #
 # **************************************************************************** #
 
-FROM debian:bullseye
+FROM    debian:bullseye
 
-RUN apt-get install --no-cache nginx openssl
-RUN mkdir -p /run/nginx
+RUN     apt-get update
+RUN     apt-get upgrade -y
 
-COPY conf/nginx.conf /etc/nginx/nginx.conf
+RUN		apt-get install -y nginx
 
-EXPOSE 443
+COPY	conf/nginx.conf /etc/nginx/nginx.conf
 
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE  8080
+
+CMD     ["nginx", "-g", "daemon off;"]

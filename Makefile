@@ -10,21 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = PmergeMe
-
-SRCS =	sources/main.cpp		\
-		sources/PmergeMe.cpp
-
-CXX = c++
-CFLAGS = -Wall -Wextra -Werror -MMD -std=c++98
+NAME = inception
 
 SECRET_DIR = .SECRET
 CERT_FILE = $(SECRET_DIR)/certificate.crt
 KEY_FILE = $(SECRET_DIR)/private_key.key
-
-OBJECTS = $(SRCS:.cpp=.o)
-DEPENDENCIES = $(SRCS:.cpp=.d)
-
 
 LOGIN = agerbaud
 DOMAIN = $(LOGIN).42.fr
