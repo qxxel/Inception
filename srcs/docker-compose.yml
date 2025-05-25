@@ -1,0 +1,6 @@
+secrets:
+  ssl_key:
+    file: ".SECRET/private_key.key"
+  ssl_crt:
+    file: ".SECRET/certificate.crt"
+
