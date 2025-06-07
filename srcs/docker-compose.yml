@@ -6,6 +6,8 @@ services:
     build:
       context: requirements/nginx
       dockerfile: Dockerfile
+    env_file:
+      - .env
     restart: on-failure
     secrets:
       - ssl_key
@@ -19,6 +21,8 @@ services:
     build:
       context: requirements/wordpress
       dockerfile: Dockerfile
+    env_file:
+      - .env
     restart: on-failure
     volumes:
       - "wordpress-data:/var/www/wordpress"
@@ -45,13 +49,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/fguirama/data/wordpress'
+      device: '/home/agerbaud/data/wordpress'
   mariadb-data:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/fguirama/data/mariadb'
+      device: '/home/agerbaud/data/mariadb'
 
 secrets:
   ssl_key:
