@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agerbaud <agerbaud@student.42.fr>          +#+  +:+       +#+         #
+#    By: agerbaud <agerbaud@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/23 15:14:09 by agerbaud          #+#    #+#              #
-#    Updated: 2025/06/07 20:05:04 by agerbaud         ###   ########.fr        #
+#    Updated: 2025/07/24 12:54:09 by agerbaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
