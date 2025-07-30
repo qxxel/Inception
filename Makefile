@@ -6,7 +6,7 @@
 #    By: agerbaud <agerbaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 19:27:59 by agerbaud          #+#    #+#              #
-#    Updated: 2025/05/25 16:12:01 by agerbaud         ###   ########.fr        #
+#    Updated: 2025/07/30 14:17:01 by agerbaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,16 +19,21 @@ KEY_FILE = $(SECRET_DIR)/private_key.key
 LOGIN = agerbaud
 DOMAIN = $(LOGIN).42.fr
 
+DOCKER_CMD = docker compose
+DOCKER_CMP = srcs/docker-compose.yml
 
-all: $(NAME)
+all: $(SECRET_DIR) up
 
-$(NAME): $(OBJECTS)
-	$(CXX) $(CFLAGS) -o $@ $^
+build: $(SECRET_DIR)
+	$(DOCKER_CMD) -f $(DOCKER_CMP) build
 
--include $(DEPENDENCIES)
+run: $(SECRET_DIR)
+	$(DOCKER_CMD) -f $(DOCKER_CMP) up -d
 
-%.o: %.cpp
-	$(CXX) $(CFLAGS) -o $@ -c $<
+stop:
+	$(DOCKER_CMD) -f $(DOCKER_CMP) down
+
+up: build run
 
 clean:
 	$(RM) $(OBJECTS) $(DEPENDENCIES)
@@ -49,4 +54,4 @@ $(SECRET_DIR):
 		-subj "/C=FR/ST=ARA/L=Lyon/O=42Lyon/OU=IT/CN=$(DOMAIN)"
 
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re build run stop up
