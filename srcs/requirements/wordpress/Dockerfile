@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agerbaud <agerbaud@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: agerbaud <agerbaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/23 15:14:09 by agerbaud          #+#    #+#              #
-#    Updated: 2025/07/24 12:54:09 by agerbaud         ###   ########.fr        #
+#    Updated: 2025/07/30 18:33:32 by agerbaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,7 @@ RUN     apt-get -y install php-fpm
 RUN     apt-get -y install wget
 RUN     apt-get -y install wordpress
 
-# RUN		curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# RUN	    chmod +x wp-cli.phar
-# RUN		mv wp-cli.phar /usr/local/bin/wp
-# RUN		wp core download --allow-root
-# RUN	    #wp config create --dbname=mariadb --dbuser=root --dbpass=coucou --dbhost=mariadb --allow-root
-
 COPY	./tools/install-wordpress.sh /usr/local/bin/
 RUN		chmod +x /usr/local/bin/install-wordpress.sh
 
 CMD		["/usr/local/bin/install-wordpress.sh"]
-
-# CMD     ["cat"]
