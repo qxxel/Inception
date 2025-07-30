@@ -17,7 +17,7 @@ services:
       - ssl_key
       - ssl_crt
     ports:
-        - "8080:8080"
+        - "443:443"
   wordpress:
     container_name: wordpress
     depends_on:

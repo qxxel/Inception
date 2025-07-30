@@ -6,7 +6,7 @@
 #    By: agerbaud <agerbaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 19:28:15 by agerbaud          #+#    #+#              #
-#    Updated: 2025/07/22 12:36:41 by agerbaud         ###   ########.fr        #
+#    Updated: 2025/07/30 12:45:07 by agerbaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,6 @@ RUN		apt-get install -y nginx
 
 COPY	conf/nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE  8080
+EXPOSE  443
 
 CMD     ["nginx", "-g", "daemon off;"]

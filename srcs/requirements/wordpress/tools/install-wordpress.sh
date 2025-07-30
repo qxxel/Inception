@@ -113,8 +113,8 @@ wp user create "${WP_USER}" "${WP_USER_EMAIL}" \
     --path=/var/www/wordpress
 
 # AJOUTE les lignes nécessaires dans le wp-config
-echo "define('WP_HOME','https://localhost:8080');" >> /var/www/wordpress/wp-config.php
-echo "define('WP_SITEURL','https://localhost:8080');" >> /var/www/wordpress/wp-config.php
+echo "define('WP_HOME','https://localhost:443');" >> /var/www/wordpress/wp-config.php
+echo "define('WP_SITEURL','https://localhost:443');" >> /var/www/wordpress/wp-config.php
 
 # Démarrage de PHP-FPM
 mkdir -p /run/php
