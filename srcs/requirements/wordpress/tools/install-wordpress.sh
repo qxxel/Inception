@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# PHP-FPM configuration to listen on all interfaces
+# Stop the script on failure
+set -e
+
+# PHP-FPM configuration to listen on 9000 port
 sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
-sed -i 's|;listen.owner = www-data|listen.owner = www-data|' /etc/php/7.4/fpm/pool.d/www.conf
-sed -i 's|;listen.group = www-data|listen.group = www-data|' /etc/php/7.4/fpm/pool.d/www.conf
 
 # Download WordPress
 cd /var/www
@@ -31,10 +32,12 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 # Waiting for the database to be available
+set +e
 until wp db check --allow-root --path=/var/www/wordpress  --host=${DB_HOST} --user=${DB_USER} --pass=${DB_PASSWORD}; do
     echo "En attente de la base de données..."
     sleep 5
 done
+set -e
 
 # Installing WordPress
 wp core install \
