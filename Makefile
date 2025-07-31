@@ -6,7 +6,7 @@
 #    By: agerbaud <agerbaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 19:27:59 by agerbaud          #+#    #+#              #
-#    Updated: 2025/07/30 22:15:08 by agerbaud         ###   ########.fr        #
+#    Updated: 2025/07/31 12:09:22 by agerbaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,28 +19,25 @@ KEY_FILE = $(SECRET_DIR)/private_key.key
 LOGIN = agerbaud
 DOMAIN = $(LOGIN).42.fr
 
-DOCKER_CMD = docker compose
-DOCKER_CMP = srcs/docker-compose.yml
+DC = docker compose
+DC_FILE = srcs/docker-compose.yml
 
-all: $(SECRET_DIR) up
+all: up
 
-build: $(SECRET_DIR)
-	$(DOCKER_CMD) -f $(DOCKER_CMP) build
+build:
+	$(DC) -f $(DC_FILE) build
 
 run: $(SECRET_DIR)
-	$(DOCKER_CMD) -f $(DOCKER_CMP) up -d
-
-stop:
-	$(DOCKER_CMD) -f $(DOCKER_CMP) down
+	$(DC) -f $(DC_FILE) up -d
 
 up: build run
 
 clean:
-	$(RM) $(OBJECTS) $(DEPENDENCIES)
+	$(DC) -f $(DC_FILE) down
 
 fclean: clean
-	$(RM) $(NAME)
 	$(RM) $(SECRET_DIR)
+	$(DC) -f $(DC_FILE) down -v
 
 re: fclean
 	$(MAKE) all
