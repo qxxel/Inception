@@ -6,7 +6,7 @@
 #    By: agerbaud <agerbaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 19:27:59 by agerbaud          #+#    #+#              #
-#    Updated: 2025/07/31 12:09:22 by agerbaud         ###   ########.fr        #
+#    Updated: 2025/07/31 12:15:41 by agerbaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ DOMAIN = $(LOGIN).42.fr
 
 DC = docker compose
 DC_FILE = srcs/docker-compose.yml
+RM = rm -rf
 
 all: up
 
@@ -35,8 +36,8 @@ up: build run
 clean:
 	$(DC) -f $(DC_FILE) down
 
-fclean: clean
-	$(RM) $(SECRET_DIR)
+fclean:
+	$(RM) -r $(SECRET_DIR)
 	$(DC) -f $(DC_FILE) down -v
 
 re: fclean
